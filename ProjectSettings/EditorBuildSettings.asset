@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Unit_2 TCP Async/Async.unity
+    path: Assets/Chapter2_TCP Async/Async.unity
     guid: cccdf5aee9dca8d40b6a3946c153aa15
   m_configObjects: {}
