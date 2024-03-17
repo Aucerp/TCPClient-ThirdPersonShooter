@@ -39,7 +39,7 @@ public class BaseHuman : MonoBehaviour
     }
 
     //Initailization
-    private void Start()
+    protected void Start()
     {
         animator = GetComponent<Animator>();
     }
