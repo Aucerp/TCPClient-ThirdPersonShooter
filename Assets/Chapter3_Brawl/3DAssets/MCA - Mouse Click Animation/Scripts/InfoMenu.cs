@@ -241,41 +241,5 @@ namespace mset {
 			fpsRect.width = fpstw;
 			fpsRect.height = fpsth;
 		}
-
-		void OnGUI () {
-			updateTexRect ();
-
-			if (infoTexture) {
-
-				GUI.color = color;
-				if (linkInfo == false) {
-					GUI.DrawTexture (texRect, infoTexture);
-				}
-
-				if (linkInfo == true) {
-
-					if (activeAtStart == true) {
-
-						GUI.DrawTexture (texRect, infoTexture);
-
-						Color tmpColor = GUI.color;
-						GUI.color = new Color (1, 1, 1, 0.0f);
-
-						if (GUI.Button (texRect, infoTexture)) {
-							UnityEditorInternal.AssetStore.Open (uASLink);
-						}
-						GUI.color = tmpColor;
-					}
-
-				}
-
-			}
-			//http://answers.unity3d.com/questions/138464/how-to-make-a-line-break-in-a-gui-label.html
-			display = "FPS : " + FPS.ToString ("#") + " ( " + FPSms.ToString ("#.00") + "ms )" + " \n Faces Tris: " + totalPoly.ToString () + " \n Vertex : " + totalVertex.ToString () + " \n Aprox Polys : " + totalRealPoly.ToString ();
-			if (stiatistiCounter == true) {
-				//GUI.Label(new Rect(10, 10, 100, 20), fpstext);
-				GUI.Label (fpsRect, display, fpsFont);
-			}
-		}
 	}
 }
