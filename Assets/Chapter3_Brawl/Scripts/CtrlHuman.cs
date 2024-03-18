@@ -23,6 +23,13 @@ public class CtrlHuman : BaseHuman
             if (hit.collider.tag == "Terrian")
             {
                 MoveTo(hit.point);
+                //發送協議
+                string sendStr = "Move|";
+                sendStr +=NetManager.GetDesc() + ",";
+                sendStr += hit.point.x.ToString() + ",";
+                sendStr += hit.point.y.ToString() + ",";
+                sendStr += hit.point.z.ToString();
+                NetManager.Send(sendStr);
             }
         }
     }

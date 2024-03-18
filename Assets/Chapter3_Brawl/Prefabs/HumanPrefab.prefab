@@ -720,7 +720,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5711048233604819202}
   - component: {fileID: 9147424460225833075}
-  - component: {fileID: 5697360928383973926}
   - component: {fileID: 3425343839818047744}
   m_Layer: 0
   m_Name: HumanPrefab
@@ -768,19 +767,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &5697360928383973926
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7857778353882857644}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 095c559b0fc66d44dbd38c6df2ffe72c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  desc: 
 --- !u!114 &3425343839818047744
 MonoBehaviour:
   m_ObjectHideFlags: 0

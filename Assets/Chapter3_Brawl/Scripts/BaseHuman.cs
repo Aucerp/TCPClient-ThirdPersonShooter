@@ -9,11 +9,15 @@ public class BaseHuman : MonoBehaviour
     //移動目標點
     private Vector3 targetPosition;
     //移動速度
-    private float speed = 1.2f;
+    private float speed = 2f;
     //動畫組件
     private Animator animator;
+    //是否正在攻击
+    internal bool isAttacking = false;
+    internal float attackTime = float.MinValue;
     //描述
     public string desc = "";
+
     //移動到某處
     public void MoveTo(Vector3 pos)
     {
@@ -36,6 +40,23 @@ public class BaseHuman : MonoBehaviour
             isMoving = false;
             animator.SetBool("isMoving", false);
         }
+    }
+
+    //攻击动作
+    public void Attack()
+    {
+        isAttacking = true;
+        attackTime = Time.time;
+        animator.SetBool("isAttacking", true);
+    }
+
+    //攻击Update
+    public void AttackUpdate()
+    {
+        if (!isAttacking) return;
+        if (Time.time - attackTime < 1.2f) return;
+        isAttacking = false;
+        animator.SetBool("isAttacking", false);
     }
 
     //Initailization
