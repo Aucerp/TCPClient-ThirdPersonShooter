@@ -38,6 +38,7 @@ public class Main : MonoBehaviour
         sendStr += pos.z + ",";
         sendStr += eul.y + ",";
         NetManager.Send(sendStr);
+        //請求玩家列表
         NetManager.Send("List|");
     }
     private void Update()
