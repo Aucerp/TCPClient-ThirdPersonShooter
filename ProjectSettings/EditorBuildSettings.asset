@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Chapter2_TCP Async/Async.unity
-    guid: cccdf5aee9dca8d40b6a3946c153aa15
+    path: Assets/Chapter3_Brawl/Brawl.unity
+    guid: 2878ee35d3e2ee04db22bc5170a5c74d
   m_configObjects: {}
