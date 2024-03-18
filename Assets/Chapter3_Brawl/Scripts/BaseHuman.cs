@@ -69,5 +69,6 @@ public class BaseHuman : MonoBehaviour
     protected void Update()
     {
         MoveUpdate();
+        AttackUpdate();
     }
 }

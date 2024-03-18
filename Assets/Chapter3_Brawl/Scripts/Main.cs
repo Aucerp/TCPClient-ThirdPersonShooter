@@ -10,7 +10,8 @@ public class Main : MonoBehaviour
     private BaseHuman myHuman;
     public Dictionary<string, BaseHuman> otherHumans = new Dictionary<string, BaseHuman>();
     // Start is called before the first frame update
-    void Start()
+
+    private void Awake()
     {
         NetManager.AddListener("Enter", OnEnter);
         NetManager.AddListener("List", OnList);
@@ -38,6 +39,9 @@ public class Main : MonoBehaviour
         sendStr += pos.z + ",";
         sendStr += eul.y + ",";
         NetManager.Send(sendStr);
+    }
+    void Start()
+    {
         //請求玩家列表
         NetManager.Send("List|");
     }

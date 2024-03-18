@@ -32,5 +32,22 @@ public class CtrlHuman : BaseHuman
                 NetManager.Send(sendStr);
             }
         }
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            if (isAttacking) return;
+            if (isMoving) return;
+
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            Physics.Raycast(ray, out hit);
+            transform.LookAt(hit.point);
+            Attack();
+            //發送協議
+            string sendStr = "Attack|";
+            sendStr += NetManager.GetDesc() + ",";
+            sendStr += transform.eulerAngles.y + ",";
+            NetManager.Send(sendStr);
+        }
     }
 }
