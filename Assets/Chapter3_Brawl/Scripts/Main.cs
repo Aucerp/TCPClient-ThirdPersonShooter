@@ -151,10 +151,12 @@ public class Main : MonoBehaviour
         string[] split = msgArgs.Split(',');
         string attDesc = split[0];
         string hitDesc = split[0];
+
         //自己死了
         if (hitDesc == myHuman.desc)
         {
             Debug.Log("Game Over");
+            myHuman.gameObject.SetActive(false);
             return;
         }
         //死了
