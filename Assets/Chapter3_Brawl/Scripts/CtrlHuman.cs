@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 
 public class CtrlHuman : BaseHuman
 {
@@ -15,6 +16,7 @@ public class CtrlHuman : BaseHuman
     {
         base.Update();
 
+        //Move
         if (Input.GetMouseButtonDown(0))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -25,7 +27,7 @@ public class CtrlHuman : BaseHuman
                 MoveTo(hit.point);
                 //發送協議
                 string sendStr = "Move|";
-                sendStr +=NetManager.GetDesc() + ",";
+                sendStr += NetManager.GetDesc() + ",";
                 sendStr += hit.point.x.ToString() + ",";
                 sendStr += hit.point.y.ToString() + ",";
                 sendStr += hit.point.z.ToString();
@@ -33,6 +35,7 @@ public class CtrlHuman : BaseHuman
             }
         }
 
+        //Attack
         if (Input.GetMouseButtonDown(1))
         {
             if (isAttacking) return;
@@ -41,13 +44,39 @@ public class CtrlHuman : BaseHuman
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             Physics.Raycast(ray, out hit);
-            transform.LookAt(hit.point);
+            Vector3 targetPosition = new Vector3(hit.point.x, transform.position.y, hit.point.z);
+            transform.LookAt(targetPosition);
             Attack();
             //發送協議
             string sendStr = "Attack|";
             sendStr += NetManager.GetDesc() + ",";
             sendStr += transform.eulerAngles.y + ",";
             NetManager.Send(sendStr);
+
+            //攻擊判定
+            float characterHeight = 1f;
+            float characterWidth = .6f;
+            float shootRange = 12f;
+            Vector3 shooterPos = transform.position + Vector3.up * (characterHeight / 2);
+            Vector3 shootPos = shooterPos + transform.forward * characterWidth;
+            Vector3 targetPos = shooterPos + transform.forward * shootRange;
+
+            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Debug.DrawLine(shootPos, mousePos, Color.red, 0.5f);
+
+            if (Physics.Linecast(shootPos, targetPos, out hit))
+            {
+                GameObject hitObj = hit.collider.gameObject;
+                if (hitObj == gameObject)
+                    return;
+                SyncHuman h = hitObj.GetComponent<SyncHuman>();
+                if (h == null)
+                    return;
+                sendStr = "Hit|";
+                sendStr += NetManager.GetDesc() + ",";
+                sendStr += h.desc + ",";
+                NetManager.Send(sendStr);
+            }
         }
     }
 }

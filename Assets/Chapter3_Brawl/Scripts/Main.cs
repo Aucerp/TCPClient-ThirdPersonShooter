@@ -146,7 +146,7 @@ public class Main : MonoBehaviour
 
     void OnDie(string msgArgs)
     {
-        Debug.Log("OnAttack " + msgArgs);
+        Debug.Log("OnDie " + msgArgs);
         //解析参数
         string[] split = msgArgs.Split(',');
         string attDesc = split[0];
@@ -160,9 +160,9 @@ public class Main : MonoBehaviour
         //死了
         if (!otherHumans.ContainsKey(hitDesc))
             return;
+        Debug.Log("Enemy" + hitDesc + " Die!");
         SyncHuman h = (SyncHuman)otherHumans[hitDesc];
         h.gameObject.SetActive(false);
-
     }
 
 }
