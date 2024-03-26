@@ -6,7 +6,7 @@ using UnityEngine.UI;
 using System;
 
 
-public static class NetManager {
+public static class NetManagerC3 {
     //定義套接字
     static Socket socket;
     //接收緩衝區

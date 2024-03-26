@@ -27,11 +27,11 @@ public class CtrlHuman : BaseHuman
                 MoveTo(hit.point);
                 //發送協議
                 string sendStr = "Move|";
-                sendStr += NetManager.GetDesc() + ",";
+                sendStr += NetManagerC3.GetDesc() + ",";
                 sendStr += hit.point.x.ToString() + ",";
                 sendStr += hit.point.y.ToString() + ",";
                 sendStr += hit.point.z.ToString();
-                NetManager.Send(sendStr);
+                NetManagerC3.Send(sendStr);
             }
         }
 
@@ -49,9 +49,9 @@ public class CtrlHuman : BaseHuman
             Attack();
             //發送協議
             string sendStr = "Attack|";
-            sendStr += NetManager.GetDesc() + ",";
+            sendStr += NetManagerC3.GetDesc() + ",";
             sendStr += transform.eulerAngles.y + ",";
-            NetManager.Send(sendStr);
+            NetManagerC3.Send(sendStr);
 
             //攻擊判定
             float characterHeight = 1f;
@@ -73,9 +73,9 @@ public class CtrlHuman : BaseHuman
                 if (h == null)
                     return;
                 sendStr = "Hit|";
-                sendStr += NetManager.GetDesc() + ",";
+                sendStr += NetManagerC3.GetDesc() + ",";
                 sendStr += h.desc + ",";
-                NetManager.Send(sendStr);
+                NetManagerC3.Send(sendStr);
             }
         }
     }

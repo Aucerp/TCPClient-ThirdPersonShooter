@@ -13,13 +13,13 @@ public class Main : MonoBehaviour
 
     private void Awake()
     {
-        NetManager.AddListener("Enter", OnEnter);
-        NetManager.AddListener("List", OnList);
-        NetManager.AddListener("Move", OnMove);
-        NetManager.AddListener("Leave", OnLeave);
-        NetManager.AddListener("Attack", OnAttack);
-        NetManager.AddListener("Die", OnDie);
-        NetManager.Connect("127.0.0.1", 8888);
+        NetManagerC3.AddListener("Enter", OnEnter);
+        NetManagerC3.AddListener("List", OnList);
+        NetManagerC3.AddListener("Move", OnMove);
+        NetManagerC3.AddListener("Leave", OnLeave);
+        NetManagerC3.AddListener("Attack", OnAttack);
+        NetManagerC3.AddListener("Die", OnDie);
+        NetManagerC3.Connect("127.0.0.1", 8888);
 
         //添加一個角色
         GameObject obj = Instantiate(humanPrefab) as GameObject;
@@ -27,27 +27,27 @@ public class Main : MonoBehaviour
         float z = UnityEngine.Random.Range(-5, 5);
         obj.transform.position = new Vector3(x, 0, z);
         myHuman = obj.AddComponent<CtrlHuman>();
-        myHuman.desc = NetManager.GetDesc();
+        myHuman.desc = NetManagerC3.GetDesc();
 
         //發送協議
         Vector3 pos = myHuman.transform.position;
         Vector3 eul = myHuman.transform.eulerAngles;
         string sendStr = "Enter|";
-        sendStr += NetManager.GetDesc() + ",";
+        sendStr += NetManagerC3.GetDesc() + ",";
         sendStr += pos.x + ",";
         sendStr += pos.y + ",";
         sendStr += pos.z + ",";
         sendStr += eul.y + ",";
-        NetManager.Send(sendStr);
+        NetManagerC3.Send(sendStr);
     }
     void Start()
     {
         //請求玩家列表
-        NetManager.Send("List|");
+        NetManagerC3.Send("List|");
     }
     private void Update()
     {
-        NetManager.Update();
+        NetManagerC3.Update();
     }
 
     private void OnEnter(string msgArgs)
@@ -61,7 +61,7 @@ public class Main : MonoBehaviour
         float z = float.Parse(split[3]);
         float eulY = float.Parse(split[4]);
         //是自己
-        if (desc == NetManager.GetDesc())
+        if (desc == NetManagerC3.GetDesc())
             return;
         //添加角色
         GameObject obj = Instantiate(humanPrefab) as GameObject;
@@ -87,7 +87,7 @@ public class Main : MonoBehaviour
             float eulY = float.Parse(split[i * 6 + 4]);
             int hp = int.Parse(split[i * 6 + 5]);
             //是自己
-            if (desc == NetManager.GetDesc())
+            if (desc == NetManagerC3.GetDesc())
                 continue;
             //添加角色
             GameObject obj = Instantiate(humanPrefab) as GameObject;
